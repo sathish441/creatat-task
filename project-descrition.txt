@@ -1,0 +1,30 @@
+Project description:
+
+There are two modules in the project:
+ 1. Java springboot
+ 2. database.
+
+ functionality: The java api's are exposed to get,add,delete,update the employee data in the database.
+
+ desc employees;
++------------+--------------+------+-----+---------+----------------+
+| Field      | Type         | Null | Key | Default | Extra          |
++------------+--------------+------+-----+---------+----------------+
+| id         | bigint(20)   | NO   | PRI | NULL    | auto_increment |
+| email_id   | varchar(255) | YES  |     | NULL    |                |
+| first_name | varchar(255) | YES  |     | NULL    |                |
+| last_name  | varchar(255) | YES  |     | NULL    |                |
++------------+--------------+------+-----+---------+----------------+
+
+Java api exposed: 
+  - GET /api/v1/employees  -->get all employees
+  
+  - GET /employees/{id}   --> get employee by id rest api
+
+  - POST /api/v1/employees --> create employee rest api
+     payload: {"firstName":"mallesh","lastName":"tes","emailId":"mallesh"}
+
+  - PUT /api/v1/employees/{empid}  --> update employee rest api
+     payload: {"firstName":"a","lastName":"b","emailId":"exam"}
+
+  - DELETE /employees/{id}  --> delete employee rest api
