@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "frontend.fullname" . }}
+  name: {{ .Release.Name }}-java-springboot
   labels:
     {{- include "frontend.labels" . | nindent 4 }}
 spec:
@@ -46,13 +46,13 @@ spec:
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
           volumeMounts:
-          - name: spring-config
-            mountPath: /opt/app/application.properties
+          - mountPath: /application.properties
+            name: spring-config
             subPath: application.properties
       volumes:
         - name: spring-config
           configMap:
-            name: {{ .Values.configmap.name }}
+            name: {{ .Release.Name }}-configmap
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}

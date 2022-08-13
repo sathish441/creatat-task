@@ -1,4 +1,4 @@
-package net.javaguides.springboot.controller;
+package springboot.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -16,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import net.javaguides.springboot.exception.ResourceNotFoundException;
-import net.javaguides.springboot.model.Employee;
-import net.javaguides.springboot.repository.EmployeeRepository;
+import springboot.exception.ResourceNotFoundException;
+import springboot.model.Employee;
+import springboot.repository.EmployeeRepository;
+
+import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*",allowedHeaders = "*")
 @RestController
 @RequestMapping("/api/v1/")
 public class EmployeeController {
@@ -32,23 +34,25 @@ public class EmployeeController {
 	// get all employees
 	@GetMapping("/employees")
 	public List<Employee> getAllEmployees(){
-                log.info("Getting All Employees Details")
+                log.info("Getting All Employees Details");
 		return employeeRepository.findAll();
 	}		
 	
 	// create employee rest api
 	@PostMapping("/employees")
 	public Employee createEmployee(@RequestBody Employee employee) {
-		log.info("Getting All Employees Details")	
+		log.info("Getting All Employees Details");
+		log.error("Error creating employee details");	
 		return employeeRepository.save(employee);
 	}
 	
 	// get employee by id rest api
 	@GetMapping("/employees/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable Long id) {
-		log.info("Getting All Employees Details")
+		log.info("Getting All Employees Details");
 		Employee employee = employeeRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
+                log.error("Error getting employee details");
 		return ResponseEntity.ok(employee);
 	}
 	
@@ -56,7 +60,7 @@ public class EmployeeController {
 	
 	@PutMapping("/employees/{id}")
 	public ResponseEntity<Employee> updateEmployee(@PathVariable Long id, @RequestBody Employee employeeDetails){
-		log.info("Getting All Employees Details")
+		log.info("Updating Employees Details");
 		Employee employee = employeeRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
 		
@@ -65,19 +69,22 @@ public class EmployeeController {
 		employee.setEmailId(employeeDetails.getEmailId());
 		
 		Employee updatedEmployee = employeeRepository.save(employee);
+	        log.error("Error deleting employee details");
 		return ResponseEntity.ok(updatedEmployee);
+
 	}
 	
 	// delete employee rest api
 	@DeleteMapping("/employees/{id}")
 	public ResponseEntity<Map<String, Boolean>> deleteEmployee(@PathVariable Long id){
-		log.info("Getting All Employees Details")
+		log.info("Deleting Employees Details");
 		Employee employee = employeeRepository.findById(id)
 				.orElseThrow(() -> new ResourceNotFoundException("Employee not exist with id :" + id));
 		
 		employeeRepository.delete(employee);
 		Map<String, Boolean> response = new HashMap<>();
 		response.put("deleted", Boolean.TRUE);
+		log.error("Error deleting employee details");
 		return ResponseEntity.ok(response);
 	}
 	
