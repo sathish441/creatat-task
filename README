@@ -1,0 +1,39 @@
+##Project Readme : How to build and deploy the application in k8
+
+pre-requisites : Take the CentOs or RHEL Linux Server
+         1. Install the git.
+          sudo yum install -y git
+        2.  Install the helm .
+          curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
+          chmod 700 get_helm.sh
+          ./get_helm.sh
+        3. Docker should be installed in the server.
+
+step 1 : Down the code from git repository.
+          git clone https://malleshdevops2021@bitbucket.org/malleshdevops2021/createat-task.git
+
+step 2: Run the Build script to build docker image and push to docker repo.
+        
+         bash springboot/java-springboot/Build.sh
+
+step 3: Deploy mysql DB with helm chart code in the name space 'database'
+        NOTE: run the below command in "CreateAT-Task"
+
+        helm upgrade --install create-task-database mariadb -f mariadb/createat-mariadb.yaml
+
+step 4: Deploy java springboot application in default namespace.
+        NOTE: run the below command in "CreateAT-Task"
+
+        helm upgrade --install create-task-java springboot -f springboot/create-task-java.yaml
+
+How to Test the Application:
+---------------------------
+ 1. Take the svc ip of java application.
+    kubectl get svc 
+
+ 2. Access the application with ip and port with base url /api/v1
+    
+   ex: http://34.93.185.47:8080/api/v1/employees
+
+payload for post method:
+  {"firstName":"mallesh","lastName":"tes","emailId":"mallesh"}
