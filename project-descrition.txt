@@ -1,4 +1,4 @@
-Project description:
+Project description: Tested and verfied
 
 There are two modules in the project:
  1. Java springboot
