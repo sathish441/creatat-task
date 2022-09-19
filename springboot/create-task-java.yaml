@@ -8,7 +8,7 @@ image:
   repository: malleshdevops/createat-devops-task
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "java-spring-v1"
+  tag: "spring-v1"
 
 imagePullSecrets: ""
 nameOverride: ""
