@@ -1,0 +1,5 @@
+Steps to follow.
+
+1. create s3 bucket in the region specified in backend.tf file
+2. create dynamodb table specified in backend.tf file
+   - Partition key value should be "LockID"
