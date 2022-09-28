@@ -1,0 +1,19 @@
+---
+# tasks file for apache
+- name: httpd install
+  package:
+    name: "{{service_name}}"
+    state: installed
+- name: start httpd
+  service:
+    name: "{{service_name}}"
+    state: started
+- name: example of jinja 2 templates
+  template:
+    src: httpd.conf.j2
+    dest: /etc/httpd/conf/httpd.conf
+  notify: restart service
+- name: copy index.html
+  copy:
+    src: user.html
+    dest: /var/www/html/

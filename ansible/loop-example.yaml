@@ -1,0 +1,12 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: install software packages
+      yum:
+        name: "{{ item}}"
+        state: present
+      loop:
+        - git
+        - java
+        - jenkins
+        - httpd

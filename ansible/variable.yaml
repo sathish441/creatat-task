@@ -1,0 +1,10 @@
+- name: variable example 
+  hosts: all
+  become: yes
+  tasks:
+    - name: get users
+      shell: cat /etc/passwd
+      register: user_output
+    - name: display users list
+      debug: 
+        var: user_output.stdout

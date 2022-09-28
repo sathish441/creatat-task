@@ -1,0 +1,16 @@
+- hosts: all
+  become: yes
+  vars:
+    packages:
+      - git
+      - java
+      - jenkins
+      - httpd
+  vars_files:
+     - vars.yaml
+  tasks:
+    - name: install software packages
+      yum:
+        name: "{{ item}}"
+        state: present
+      loop: "{{ packages}}"

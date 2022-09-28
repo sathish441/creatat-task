@@ -1,0 +1,10 @@
+- hosts: all
+  vars:
+    user_name: mallesh
+    batch_name: devops
+    batch_number: 10
+  tasks:
+    - name: example of jinja 2 templates
+      template:
+        src: test.j2
+        dest: /tmp/config

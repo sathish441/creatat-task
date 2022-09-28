@@ -1,0 +1,11 @@
+- name: variable example 
+  hosts: all
+  become: yes
+  tasks:
+    - name: get users
+      shell: cat /etc/os-release
+      register: user_output
+    - name: display users list
+      debug: 
+        msg: "{{user_output.stdout}}"
+      when: user_output.stdout.find('NAME') == "Amazon Linux"

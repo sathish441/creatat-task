@@ -1,0 +1,17 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: creating directory
+      file:
+        name: "{{ working_directory }}"
+        state: directory
+    - name: list variable example
+      yum:
+        name: "{{ packages }}"
+    - name: dictionary variable
+      command: ls "/home/ec2-user/{{dict_test['name']}}"
+      register: output
+    - name: display output
+      debug:
+        var: output
+

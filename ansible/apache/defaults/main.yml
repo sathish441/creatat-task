@@ -1,0 +1,4 @@
+---
+# defaults file for apache
+service_name: httpd
+http_port: 8000

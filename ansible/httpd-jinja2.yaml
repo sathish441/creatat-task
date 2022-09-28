@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  vars:
+    port: 81
+    logging: error
+  tasks:
+    - name: example of jinja 2 templates
+      template:
+        src: httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf

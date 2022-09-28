@@ -1,0 +1,19 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: install nginx
+      block:
+        - yum: 
+            name: nginx
+            state: latest
+      #ignore_errors: yes
+          register: output
+      rescue:
+        - name: print error
+          debug:
+            var: output
+      always:
+        - name: start the nginx
+          service:
+            name: nginx
+            state: started

@@ -1,0 +1,7 @@
+working_directory: /home/ec2-user/ansible-example
+packages:
+- httpd
+- java
+dict_test:
+  name: devops
+  batch: devops11

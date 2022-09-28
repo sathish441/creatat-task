@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: install nginx
+      yum: name=nginx-server state=latest
+      #ignore_errors: yes
+    - name: start the nginx
+      service:
+        name: nginx
+        state: started

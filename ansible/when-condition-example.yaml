@@ -1,0 +1,18 @@
+- hosts: all
+  become: yes
+  vars:
+    remote_file: /etc/httpd/conf/httpd.conf
+  tasks:
+    - name: checking file details
+      stat:
+        path: "{{remote_file}}-1"
+      register: output
+    - name: display file output
+      debug:
+        var: output
+    - name: taking backup of httpd.conf
+      command: cp "{{remote_file}}" "{{remote_file}}-backup"
+      #when: output.stat.exists
+      when: output['stat']['exists']
+
+

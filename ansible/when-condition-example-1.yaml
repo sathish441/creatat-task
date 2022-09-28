@@ -1,0 +1,24 @@
+- hosts: all
+  become: yes
+  vars:
+    remote_file: /etc/httpd/conf/httpd.conf
+  tasks:
+    - name: checking file details
+      stat:
+        path: "{{remote_file}}-1"
+      register: output
+    - name: display file output
+      debug:
+        var: output
+    - name: taking backup of httpd.conf
+      command: cp "{{remote_file}}" "{{remote_file}}-backup"
+      #when: output.stat.exists
+      when: output['stat']['exists']
+    tasks:
+  - name: Shut down CentOS 6 and Debian 7 systems
+    yum:
+      name: httpd
+    when: (ansible_facts['distribution'] == "CentOS" and ansible_facts['distribution_major_version'] == "6") or
+          (ansible_facts['distribution'] == "Debian" and ansible_facts['distribution_major_version'] == "7"
+
+

@@ -1,0 +1,16 @@
+---
+- hosts: all # this indicates that which are servers is going to execute the task.
+  become: yes # are we going to sudo to root user or not
+  gather_facts: false
+  vars:
+    service_name: httpd
+  tasks:
+    - name: httpd install
+      package:
+        name: "{{ service_name }}"
+        state: installed
+    - name: start httpd
+      service:
+        name: "{{ service_name }}"
+        state: restarted
+...

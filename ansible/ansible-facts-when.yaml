@@ -1,0 +1,10 @@
+- hosts: all
+  become: yes
+  gather_facts: yes
+  tasks:
+    - name: display the remote server details
+      debug:
+        var: ansible_facts
+    - name: display ipv4 address
+      debug:
+        msg: "{{ansible_facts.all_ipv4_addresses}} and {{ansible_facts.os_family}}"

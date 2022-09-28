@@ -1,0 +1,15 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: deploying nginx k8 file
+      command: kubectl apply -f /home/ec2-user/devops11/k8/nginx-deploy.yaml
+    - name: changing nginx deployment replicas
+      replace:
+        path: /home/ec2-user/devops11/k8/nginx-deploy.yaml
+        regexp: 'replicas: 3'
+        replace: 'replicas: 5'
+      notify: deploy changes
+  handlers:
+    - name: deploy changes
+      command: kubectl apply -f /home/ec2-user/devops11/k8/nginx-deploy.yaml
+      listen: deploy changes

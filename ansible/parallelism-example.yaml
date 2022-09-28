@@ -1,0 +1,9 @@
+- hosts: all
+  become: yes
+  tasks:
+    - name: httpd install
+      yum:
+        name: httpd
+        state: latest
+      delegate_to: 3.93.239.178
+      #run_once: yes

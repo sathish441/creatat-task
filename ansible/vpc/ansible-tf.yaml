@@ -1,0 +1,9 @@
+- hosts: all
+  gather_facts: false
+  tasks:
+    - name: change directory
+      command: cd /home/ec2-user/devops11/vpc
+    - name: initialize terraform
+      command: terraform init -chdir="/home/ec2-user/devops11/vpc"
+    - name: creating infrastructure
+      command: terraform apply -auto-approve /home/ec2-user/devops11/vpc

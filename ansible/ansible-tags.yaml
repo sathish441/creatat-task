@@ -1,0 +1,30 @@
+- hosts: all
+  become: yes
+  gather_facts: false
+  tasks:
+    - name: httpd install
+      yum:
+        name: httpd
+        state: present
+      tags:
+        - httpd
+    - name: copy file
+      copy:
+        src: user.html
+        dest: /var/www/html
+      tags:
+        - file
+    - name: create file
+      file:
+        name: /home/ec2-user/devops11/devops-ansible.txt
+        state: touch
+      tags:
+        - file
+        - create
+    - name: create file and add content
+      lineinfile:
+        path: /home/ec2-user/devops11/abc.txt
+        create: yes
+        line: "ansible tags example"
+      tags:
+        - create
