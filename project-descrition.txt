@@ -1,4 +1,4 @@
-Project description: Tested and verfied
+Project description: Tested and verfied in eks
 
 github testing
 
