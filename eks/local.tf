@@ -1,4 +1,4 @@
-locals {
+/*locals {
 worker_groups = [
     {
       name                          = "frontend-worker-group"
@@ -22,4 +22,4 @@ worker_groups = [
       asg_desired_capacity          = 1
     }, 
   ]
-}
+}*/
